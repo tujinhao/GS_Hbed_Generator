@@ -6,12 +6,14 @@
 import matplotlib.pyplot as plt
 import json
 # 画布原点(4020,3277)
+
+#曲线起始坐标
 offsetx = 4040
 offsety = 2990
 
 strokeWidth = 4  # 线宽为strokeWidth * 10 mil
 clearance = 6    #两条线中心间距为clearance* 10 mil  线边缘的间距为（clearance - strokeWidth）*10mil
-order = 5
+order = 6   #曲线阶数
 
 def _hilbert(direction, rotation, order):
     if order == 0:
@@ -47,7 +49,7 @@ def hilbert(order):
     _hilbert(0, 1, order)
     return (x, y)
 
-
+#把生成的希尔伯特曲线坐标写成立创EDA布线的形式
 def PCB_hilbert():
     f = open('./TRACK.txt', 'w', encoding='utf-8')
 
@@ -62,7 +64,7 @@ def PCB_hilbert():
 
     f.close()
 
-
+#创建一个json文件，可以直接用立创EDA打开
 def creat_json():
 
     f = open('./TRACK.txt', 'r', encoding='utf-8')
