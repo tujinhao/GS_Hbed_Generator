@@ -5,15 +5,36 @@
 
 import matplotlib.pyplot as plt
 import json
-# 画布原点(4020,3277)
 
-#曲线起始坐标
-offsetx = 4040
-offsety = 2990
+# 立创EDA有关于坐标都是 x*10mil
+# 画布原点(4020,3343)  
+# pcb坐标系原点在左上角，X轴从左到右递增，y轴从上到下递增
+pcb_x0 = 4020
+pcb_y0 = 3343
 
-strokeWidth = 4  # 线宽为strokeWidth * 10 mil
-clearance = 6    #两条线中心间距为clearance* 10 mil  线边缘的间距为（clearance - strokeWidth）*10mil
+# 曲线
+strokeWidth = 3  # 线宽为strokeWidth * 10 mil
+clearance = 5    #两条线中心间距为clearance* 10 mil  线边缘的间距为（clearance - strokeWidth）*10mil
 order = 6   #曲线阶数
+
+size = ((2**order-1) * clearance + strokeWidth)     #边长 /mil
+print( str(size * 10 ) + " mil")
+print( str(size * 10 * 0.0254) + " mm")
+
+if(size > 394 ):
+    print( "曲线边长大于10cm")
+#曲线起始坐标
+#曲线从PCB的左下角开始绘制
+# 100mm = 3940 mil
+
+
+
+#曲线居中
+offsetx = pcb_x0 + 197 - size/2  
+offsety = pcb_y0 - size/2 - 197
+
+
+
 
 def _hilbert(direction, rotation, order):
     if order == 0:
