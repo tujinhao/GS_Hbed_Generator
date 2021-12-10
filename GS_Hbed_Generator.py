@@ -218,7 +218,7 @@ def creat_json():
     f = open('./Bed.json', 'w')
     f.write(json_data)
     f.close()
-    print(json_data)
+    #print(json_data)
 
 
 def main():
